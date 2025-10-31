@@ -5,6 +5,23 @@ import { useState } from "react";
 
 function App() {
   const [data, setData] = useState(db);
+  const [cart, setCart] = useState([]);
+
+  function handleAddToCart(item) {
+    const itemExists = cart.findIndex((cartItem) => cartItem.id === item.id);
+
+    if (itemExists >= 0) {
+      const updatedCart = [...cart];
+
+      updatedCart[itemExists].quantity += 1;
+
+      setCart(updatedCart);
+    } else {
+      item.quantity = 1;
+
+      setCart((prevCart) => [...prevCart, item]);
+    }
+  }
 
   return (
     <>
@@ -16,10 +33,9 @@ function App() {
           {data.map((guitar) => {
             return (
               <Guitar
-                image={guitar.image}
-                name={guitar.name}
-                description={guitar.description}
-                price={guitar.price}
+                key={guitar.id}
+                guitar={guitar}
+                handleAddToCart={handleAddToCart}
               />
             );
           })}

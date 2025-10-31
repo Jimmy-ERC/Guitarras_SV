@@ -1,21 +1,27 @@
-export default function Guitar(props) {
+export default function Guitar({ guitar, handleAddToCart }) {
+  const { id, name, image, description, price } = guitar;
+
   return (
     <>
       <div className="col-md-6 col-lg-4 my-4 row align-items-center">
         <div className="col-4">
           <img
             className="img-fluid"
-            src={`./img/${props.image}.jpg`}
+            src={`./img/${image}.jpg`}
             alt="imagen guitarra"
           />
         </div>
         <div className="col-8">
-          <h3 className="text-black fs-4 fw-bold text-uppercase">
-            {props.name}
-          </h3>
-          <p>{props.description}</p>
-          <p className="fw-black text-primary fs-3">${props.price}</p>
-          <button type="button" className="btn btn-dark w-100">
+          <h3 className="text-black fs-4 fw-bold text-uppercase">{name}</h3>
+          <p>{description}</p>
+          <p className="fw-black text-primary fs-3">${price}</p>
+          <button
+            type="button"
+            className="btn btn-dark w-100"
+            //Se escribe como arrow function para que no se ejecute
+            //al renderizar el componente y espere al evento onClick
+            onClick={() => handleAddToCart(guitar)}
+          >
             Agregar al Carrito
           </button>
         </div>
