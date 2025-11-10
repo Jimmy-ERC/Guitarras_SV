@@ -4,10 +4,11 @@ import { db } from "./data/db.js";
 import { useState } from "react";
 
 function App() {
-  const [data, setData] = useState(db);
+  const [data, setData] = useState(db); // db se puede colocar directamente aquí, ya que es estático
   const [cart, setCart] = useState([]);
 
   function handleAddToCart(item) {
+    // findIndex devuelve el índice del elemento que cumple la condición, o -1 si no lo encuentra
     const itemExists = cart.findIndex((cartItem) => cartItem.id === item.id);
 
     if (itemExists >= 0) {
@@ -25,7 +26,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header cart={cart} />
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
 
